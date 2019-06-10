@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
 import com.elfan.mytask.adapter.FilmAdapter;
-import com.elfan.mytask.model.FilmModel;
 import com.elfan.mytask.model.ResponseFilm;
 import com.elfan.mytask.model.ResultsItem;
 import com.elfan.mytask.refrofit.RetrofitConfig;
@@ -30,15 +29,9 @@ public class FilmActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_film);
 
+        getSupportActionBar().setTitle("Film");
+
         recycler = findViewById(R.id.rv_film);
-
-        /*FilmModel filmModel = new FilmModel();
-        filmModel.setJudulFilm("Judul Film");
-        filmModel.setPosterFilm("https://image.tmdb.org/t/p/w185_and_h278_bestv2/3ZEqU9Ykmn8zGDUwWnmTfHaaWRB.jpg");
-
-        for (int i = 0; i <20 ; i++) {
-            dataFilm.add(filmModel);
-        }*/
         
         getDataOnline();
 

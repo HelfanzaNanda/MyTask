@@ -3,7 +3,6 @@ package com.elfan.mytask.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcel;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,7 +14,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.elfan.mytask.DetailFIlmActivity;
 import com.elfan.mytask.R;
-import com.elfan.mytask.model.FilmModel;
 import com.elfan.mytask.model.ResultsItem;
 
 import org.parceler.Parcels;
