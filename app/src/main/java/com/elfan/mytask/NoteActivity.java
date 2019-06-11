@@ -58,4 +58,5 @@ public class NoteActivity extends AppCompatActivity {
         noteModels = realm.showData();
         recycler.setAdapter(new NoteAdapter(NoteActivity.this, noteModels));
     }
+
 }

@@ -6,8 +6,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class MainActivity extends AppCompatActivity {
-    ImageButton on, off;
+    CircleImageView on, off;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

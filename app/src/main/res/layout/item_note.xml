@@ -5,12 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <ImageView
-        android:layout_margin="4dp"
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/ivGambar"
-        android:src="@drawable/ic_launcher_background"
-        android:layout_width="60dp"
-        android:layout_height="60dp" />
+        android:layout_margin="4dp"
+        android:layout_width="56dp"
+        android:layout_height="55dp"
+        android:src="@drawable/ic_person"
+        app:civ_border_width="2dp"
+        app:civ_border_color="#FFAB00"/>
     
     <TextView
         android:id="@+id/tvJudul"

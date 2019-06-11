@@ -30,10 +30,4 @@
         android:layout_margin="@dimen/fab_margin"
         app:srcCompat="@drawable/ic_add" />
 
-    <android.support.v7.widget.SearchView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    </android.support.v7.widget.SearchView>
-
 </android.support.design.widget.CoordinatorLayout>

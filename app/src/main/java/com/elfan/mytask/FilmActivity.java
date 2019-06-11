@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.elfan.mytask.adapter.FilmAdapter;
 import com.elfan.mytask.model.ResponseFilm;
@@ -29,12 +30,8 @@ public class FilmActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_film);
 
-        getSupportActionBar().setTitle("Film");
-
         recycler = findViewById(R.id.rv_film);
-        
         getDataOnline();
-
         recycler.setAdapter(new FilmAdapter(FilmActivity.this, dataFilm));
         recycler.setLayoutManager(new GridLayoutManager(FilmActivity.this, 2));
 
