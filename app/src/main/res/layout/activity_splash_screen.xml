@@ -7,21 +7,22 @@
     android:layout_height="match_parent"
     tools:context=".SplashScreen">
 
-    <ProgressBar
-        android:layout_above="@id/txtPg"
-        android:id="@+id/pg"
-        android:indeterminate="true"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"/>
     <TextView
-        android:layout_marginBottom="20dp"
         android:id="@+id/txtPg"
-        android:layout_alignParentBottom="true"
-        android:gravity="center"
-        android:textSize="18sp"
-        android:text="Loading..."
+        android:fontFamily="sans-serif-smallcaps"
+        style="?android:attr/text"
+        android:textSize="30sp"
+        android:layout_centerVertical="true"
+        android:gravity="center_horizontal"
+        android:text="MyTask"
+        android:textColor="@color/colorAccent"
+        android:textStyle="bold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+    <View
+        android:layout_below="@id/txtPg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
 </RelativeLayout>

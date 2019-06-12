@@ -30,6 +30,7 @@ public class DetailNoteActivity extends AppCompatActivity {
     FloatingActionButton update;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

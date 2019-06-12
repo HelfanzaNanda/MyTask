@@ -19,8 +19,9 @@ import java.util.Locale;
 
 public class AddNoteActivity extends AppCompatActivity {
     private EditText edJudul, edJumlah, edTanggal;
-    RealmHelper realm;
     FloatingActionButton add;
+    RealmHelper realm;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +51,6 @@ public class AddNoteActivity extends AppCompatActivity {
             }
         });
 
-
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,7 +75,7 @@ public class AddNoteActivity extends AppCompatActivity {
 
     }
 
-    public void init(){
+    private void init(){
         edJudul = findViewById(R.id.ed_judul);
         edJumlah = findViewById(R.id.ed_jumlah);
         edTanggal = findViewById(R.id.ed_tanggal);
