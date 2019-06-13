@@ -50,6 +50,9 @@ public class RealmHelper {
     }
 
     public List<NoteModel> showData(){
+        if(realm.isClosed()){
+            realm = Realm.getDefaultInstance();
+        }
         RealmResults<NoteModel> datahasil = realm.where(NoteModel.class).findAll();
         List<NoteModel> datalist = new ArrayList<>();
         datalist.addAll(realm.copyFromRealm(datahasil));
