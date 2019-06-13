@@ -14,6 +14,10 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+<<<<<<< HEAD
+=======
+import android.widget.ArrayAdapter;
+>>>>>>> f6fe00fb48c184a3cc4f12770eff2fb0a72b675a
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -28,6 +32,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 public class NoteActivity extends AppCompatActivity {
 
@@ -47,8 +52,13 @@ public class NoteActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+<<<<<<< HEAD
         getSupportActionBar().setTitle("Note");
 
+=======
+        bottomsheet = findViewById(R.id.bottomsheet);
+        bottomSheetBehavior = BottomSheetBehavior.from(bottomsheet);
+>>>>>>> f6fe00fb48c184a3cc4f12770eff2fb0a72b675a
         init();
         setTanggal();
         addData();
@@ -72,7 +82,10 @@ public class NoteActivity extends AppCompatActivity {
         recycler = findViewById(R.id.rv_note);
         recycler.setAdapter(new NoteAdapter(NoteActivity.this, noteModels));
         recycler.setLayoutManager(new LinearLayoutManager(NoteActivity.this));
+<<<<<<< HEAD
         //recycler.setHasFixedSize(true);
+=======
+>>>>>>> f6fe00fb48c184a3cc4f12770eff2fb0a72b675a
         recycler.addItemDecoration(new DividerItemDecoration(NoteActivity.this, 1));
     }
 
@@ -166,5 +179,23 @@ public class NoteActivity extends AppCompatActivity {
         edJudul.getText().clear();
         edJumlah.getText().clear();
         edTanggal.getText().clear();
+    }
+
+    private void hideKeyboard(){
+        View v = this.getCurrentFocus();
+        if(v != null){
+            InputMethodManager inputMethodManager = (InputMethodManager) NoteActivity.this.getSystemService(Activity.INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED){
+            hideKeyboard();
+            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        }else{
+            super.onBackPressed();
+        }
     }
 }

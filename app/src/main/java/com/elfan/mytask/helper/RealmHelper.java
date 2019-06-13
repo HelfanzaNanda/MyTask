@@ -50,7 +50,11 @@ public class RealmHelper {
     }
 
     public List<NoteModel> showData(){
+<<<<<<< HEAD
         if (realm.isClosed()){
+=======
+        if(realm.isClosed()){
+>>>>>>> f6fe00fb48c184a3cc4f12770eff2fb0a72b675a
             realm = Realm.getDefaultInstance();
         }
         RealmResults<NoteModel> datahasil = realm.where(NoteModel.class).findAll();
