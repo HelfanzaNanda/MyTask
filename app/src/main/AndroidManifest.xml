@@ -21,7 +21,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".DetailNoteActivity" />
-        <activity android:name=".AddNoteActivity" />
         <activity
             android:name=".DetailFIlmActivity"
             android:label="@string/title_activity_detail_film"

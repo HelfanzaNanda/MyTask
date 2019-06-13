@@ -97,10 +97,10 @@ public class DetailNoteActivity extends AppCompatActivity {
         update = findViewById(R.id.fab_update);
     }
 
-    public void showDialog(){
+    private void DialogDelete(){
         final int dataID = getIntent().getIntExtra(KEY_ID, 0);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Apakah Data Ini Akan Di Hapus???");
+        builder.setTitle("apakah data ini akan di hapus???");
         builder
                 .setMessage("klik YA untuk hapus")
                 .setIcon(R.drawable.ic_delete_color)
@@ -110,7 +110,7 @@ public class DetailNoteActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         realm.deleteData(dataID);
                         finish();
-                        Toast.makeText(DetailNoteActivity.this, "Data Berhasil Dihapus", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DetailNoteActivity.this, "Data Berhasil diHapus", Toast.LENGTH_SHORT).show();
                     }
                 })
                 .setNegativeButton("TIDAK", new DialogInterface.OnClickListener() {
@@ -136,7 +136,7 @@ public class DetailNoteActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.action_delete:
-                showDialog();
+                DialogDelete();
                 return true;
         }
         return false;

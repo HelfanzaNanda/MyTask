@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,6 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -36,6 +38,7 @@ public class NoteActivity extends AppCompatActivity {
     LinearLayout bottomsheet;
     private EditText edJudul, edJumlah, edTanggal;
     FloatingActionButton add;
+    SwipeRefreshLayout refreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,27 +48,18 @@ public class NoteActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         bottomsheet = findViewById(R.id.bottomsheet);
-        final BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from(bottomsheet);
-        //bottomSheetBehavior.setHideable(true);
-
         init();
         setTanggal();
         addData();
         showData();
-        /*FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
-            public void onClick(View view) {
-                if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED){
-                    bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-                }else{
-                    bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                }
-                //startActivity(new Intent(NoteActivity.this, AddNoteActivity.class));
+            public void onRefresh() {
+                showData();
+                refreshLayout.setRefreshing(false);
             }
-        });*/
-        //realm = new RealmHelper(NoteActivity.this);
-        //get data realm
+        });
 
     }
 
@@ -97,10 +91,9 @@ public class NoteActivity extends AppCompatActivity {
                     noteModel.setTanggal(edTanggal.getText().toString().trim());
                     realm.insertData(noteModel);
                     bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                    noteModels = realm.showData();
-                    recycler.setAdapter(new NoteAdapter(NoteActivity.this, noteModels));
                     Toast.makeText(NoteActivity.this, "Data Berhasil Ditambahkan", Toast.LENGTH_SHORT).show();
                 }
+                showData();
                 clear();
             }
         });
@@ -141,6 +134,7 @@ public class NoteActivity extends AppCompatActivity {
         edJumlah = findViewById(R.id.ed_jumlah);
         edTanggal = findViewById(R.id.ed_tanggal);
         add = findViewById(R.id.fab_add);
+        refreshLayout = findViewById(R.id.swipe_refresh);
         realm = new RealmHelper(NoteActivity.this);
     }
 
@@ -149,5 +143,4 @@ public class NoteActivity extends AppCompatActivity {
         edJumlah.getText().clear();
         edTanggal.getText().clear();
     }
-
 }

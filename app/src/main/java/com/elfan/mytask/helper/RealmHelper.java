@@ -26,12 +26,6 @@ public class RealmHelper {
         realm.beginTransaction();
         realm.copyToRealm(noteModel);
         realm.commitTransaction();
-        /*realm.addChangeListener(new RealmChangeListener<Realm>() {
-            @Override
-            public void onChange(Realm realm) {
-                Toast.makeText(context, "Data Berhasil Ditambahkan", Toast.LENGTH_SHORT).show();
-            }
-        });*/
         realm.close();
     }
 
@@ -44,12 +38,6 @@ public class RealmHelper {
         realm.beginTransaction();
         realm.copyToRealmOrUpdate(noteModel);
         realm.commitTransaction();
-        /*realm.addChangeListener(new RealmChangeListener<Realm>() {
-            @Override
-            public void onChange(Realm realm) {
-                Toast.makeText(context, "Berhasil Update Data", Toast.LENGTH_SHORT).show();
-            }
-        });*/
         realm.close();
     }
 
@@ -58,12 +46,6 @@ public class RealmHelper {
         NoteModel noteModel = realm.where(NoteModel.class).equalTo("id", id).findFirst();
         noteModel.deleteFromRealm();
         realm.commitTransaction();
-        /*realm.addChangeListener(new RealmChangeListener<Realm>() {
-            @Override
-            public void onChange(Realm realm) {
-                Toast.makeText(context, "Data Berhasil DiHapus", Toast.LENGTH_SHORT).show();
-            }
-        });*/
         realm.close();
     }
 
