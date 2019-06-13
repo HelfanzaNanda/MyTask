@@ -1,11 +1,10 @@
 package com.elfan.mytask;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
@@ -14,7 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -39,6 +38,7 @@ public class NoteActivity extends AppCompatActivity {
     private EditText edJudul, edJumlah, edTanggal;
     FloatingActionButton add;
     SwipeRefreshLayout refreshLayout;
+    private BottomSheetBehavior bottomSheetBehavior;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,12 +47,16 @@ public class NoteActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        bottomsheet = findViewById(R.id.bottomsheet);
+        getSupportActionBar().setTitle("Note");
+
         init();
         setTanggal();
         addData();
         showData();
+        refresh();
+    }
 
+    private void refresh(){
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -60,15 +64,15 @@ public class NoteActivity extends AppCompatActivity {
                 refreshLayout.setRefreshing(false);
             }
         });
-
     }
 
     private void showData(){
+        noteModels.clear();
         noteModels = realm.showData();
         recycler = findViewById(R.id.rv_note);
         recycler.setAdapter(new NoteAdapter(NoteActivity.this, noteModels));
         recycler.setLayoutManager(new LinearLayoutManager(NoteActivity.this));
-        recycler.setHasFixedSize(true);
+        //recycler.setHasFixedSize(true);
         recycler.addItemDecoration(new DividerItemDecoration(NoteActivity.this, 1));
     }
 
@@ -76,7 +80,6 @@ public class NoteActivity extends AppCompatActivity {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from(bottomsheet);
                 if (TextUtils.isEmpty(edJudul.getText().toString().trim())){
                     edJudul.setError("Judul Tidak Boleh Kosong");
                 }else if (TextUtils.isEmpty(edJumlah.getText().toString().trim())){
@@ -90,10 +93,11 @@ public class NoteActivity extends AppCompatActivity {
                     noteModel.setJumlahhutang(edJumlah.getText().toString().trim());
                     noteModel.setTanggal(edTanggal.getText().toString().trim());
                     realm.insertData(noteModel);
+                    noteModels = realm.showData();
+                    recycler.setAdapter(new NoteAdapter(NoteActivity.this, noteModels));
                     bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
                     Toast.makeText(NoteActivity.this, "Data Berhasil Ditambahkan", Toast.LENGTH_SHORT).show();
                 }
-                showData();
                 clear();
             }
         });
@@ -129,6 +133,24 @@ public class NoteActivity extends AppCompatActivity {
         recycler.setAdapter(new NoteAdapter(NoteActivity.this, noteModels));
     }
 
+    @Override
+    public void onBackPressed() {
+        if (bottomSheetBehavior.getState() == bottomSheetBehavior.STATE_EXPANDED){
+            hideKeyboard();
+            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        }else {
+            super.onBackPressed();
+        }
+    }
+
+    private void hideKeyboard() {
+        View view = this.getCurrentFocus();
+        if (view != null){
+            InputMethodManager inputMethodManager = (InputMethodManager) NoteActivity.this.getSystemService(Activity.INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(),0);
+        }
+    }
+
     private void init(){
         edJudul = findViewById(R.id.ed_judul);
         edJumlah = findViewById(R.id.ed_jumlah);
@@ -136,6 +158,8 @@ public class NoteActivity extends AppCompatActivity {
         add = findViewById(R.id.fab_add);
         refreshLayout = findViewById(R.id.swipe_refresh);
         realm = new RealmHelper(NoteActivity.this);
+        bottomsheet = findViewById(R.id.bottomsheet);
+        bottomSheetBehavior = BottomSheetBehavior.from(bottomsheet);
     }
 
     private void clear(){

@@ -11,9 +11,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".DetailFruitActivity"></activity>
+        <activity android:name=".FruitActivity" />
+        <activity android:name=".PersegiActivity" />
         <activity
-            android:theme="@style/AppTheme.NoActionBar"
-            android:name=".SplashScreen">
+            android:name=".SplashScreen"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,11 +32,8 @@
             android:name=".NoteActivity"
             android:label="@string/title_activity_note"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".FilmActivity"/>
-        <activity android:name=".MainActivity">
-
-        </activity>
+        <activity android:name=".FilmActivity" />
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

@@ -10,7 +10,7 @@ import android.widget.ImageButton;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity {
-    CardView on, off;
+    CardView on, off, luas, fruit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
 
         on = findViewById(R.id.btnOnline);
         off = findViewById(R.id.btnOffline);
+        luas = findViewById(R.id.btnPersegi);
+        fruit = findViewById(R.id.fruit);
 
         on.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -33,5 +35,20 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, NoteActivity.class));
             }
         });
+        luas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, PersegiActivity.class));
+            }
+        });
+
+        fruit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, FruitActivity.class));
+            }
+        });
+
+
     }
 }

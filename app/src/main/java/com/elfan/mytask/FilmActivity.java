@@ -34,6 +34,7 @@ public class FilmActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_film);
+        getSupportActionBar().setTitle("Film");
 
         recycler = findViewById(R.id.rv_film);
         getDataOnline();
