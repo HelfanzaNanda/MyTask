@@ -1,7 +1,6 @@
 package com.elfan.mytask.helper;
 
 import android.content.Context;
-import android.widget.Toast;
 
 import com.elfan.mytask.model.NoteModel;
 
@@ -9,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.realm.Realm;
-import io.realm.RealmChangeListener;
 import io.realm.RealmResults;
 
 public class RealmHelper {
@@ -50,11 +48,7 @@ public class RealmHelper {
     }
 
     public List<NoteModel> showData(){
-<<<<<<< HEAD
-        if (realm.isClosed()){
-=======
         if(realm.isClosed()){
->>>>>>> f6fe00fb48c184a3cc4f12770eff2fb0a72b675a
             realm = Realm.getDefaultInstance();
         }
         RealmResults<NoteModel> datahasil = realm.where(NoteModel.class).findAll();

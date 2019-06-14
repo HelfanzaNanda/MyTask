@@ -5,10 +5,10 @@
     <item
         android:enabled="true"
         android:visible="true"
-        android:id="@+id/action_view"
+        android:id="@+id/action_search"
         android:orderInCategory="100"
-        android:icon="@drawable/ic_view_quilt"
+        android:icon="@drawable/ic_search"
         app:showAsAction="always"
-        android:title="view" />
+        android:title="search" />
 </menu>
 
