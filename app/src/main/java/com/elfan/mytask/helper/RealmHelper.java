@@ -57,19 +57,6 @@ public class RealmHelper {
         return datalist;
     }
 
-    private List<NoteModel>filterData(List<NoteModel> noteModels, String newQuery){
-        String lowercasequery = newQuery.toLowerCase();
-        List<NoteModel> filterData = new ArrayList<>();
-        for (int i = 0; i < noteModels.size(); i++) {
-            String text = noteModels.get(i).getJudul().toLowerCase();
-            if (text.contains(lowercasequery)){
-                filterData.add(noteModels.get(i));
-            }
-        }
-        return filterData;
-
-    }
-
     public long getNextId(){
         if (realm.where(NoteModel.class).count() != 0){
             long id = realm.where(NoteModel.class).max("id").longValue();

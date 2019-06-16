@@ -10,11 +10,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -29,7 +31,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
-import java.util.Objects;
 
 public class NoteActivity extends AppCompatActivity {
 
@@ -172,4 +173,38 @@ public class NoteActivity extends AppCompatActivity {
         }
     }
 
+    private List<NoteModel>filterData(List<NoteModel> noteModels, String newQuery){
+        String lowercasequery = newQuery.toLowerCase();
+        List<NoteModel> filterData = new ArrayList<>();
+        for (int i = 0; i < noteModels.size(); i++) {
+            String text = noteModels.get(i).getJudul().toLowerCase();
+            if (text.contains(lowercasequery)){
+                filterData.add(noteModels.get(i));
+            }
+        }
+        return filterData;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_note, menu);
+        MenuItem menuItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView)menuItem.getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                //Toast.makeText(NoteActivity.this, ""+newText, Toast.LENGTH_SHORT).show();
+                List<NoteModel> filterNote = filterData(noteModels, newText);
+                recycler.setAdapter(new NoteAdapter(NoteActivity.this, filterNote));
+                return true;
+            }
+        });
+
+        return super.onCreateOptionsMenu(menu);
+    }
 }
